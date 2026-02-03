@@ -767,3 +767,39 @@ header::after, section::after {
 /* 15) Ensure MySpace sharpness stays */
 * { border-radius: 0 !important; }
 .btn { min-height: 44px; }
+/* Guestbook form (MySpace style) */
+.guestbook-form {
+  border: 2px solid rgba(140, 20, 30, 0.85);
+  padding: 12px;
+  margin-bottom: 16px;
+  background: #000;
+  display: grid;
+  gap: 8px;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  background: #000;
+  color: #efe8ea;
+  border: 1px solid rgba(140, 20, 30, 0.85);
+  padding: 6px 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.guestbook-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.guestbook-form input::placeholder,
+.guestbook-form textarea::placeholder {
+  color: rgba(168, 146, 151, 0.7);
+}
+
+.guestbook-form button {
+  align-self: flex-start;
+}
+.comment-meta {
+  letter-spacing: 0.6px;
+}

@@ -166,36 +166,161 @@
     <section>
       <h2>Guestbook</h2>
 
-      <div class="comment">
-        <div class="comment-header">
-          <span class="comment-user">xXRecruiterSlayerXx</span>
-          <span class="comment-meta">01/27/2006 • 5:13 PM</span>
-        </div>
-        <div class="comment-body">
-          ur backend experience is 🔥. drop the repo links!!
-        </div>
-      </div>
+      <form id="guestbook-form" class="guestbook-form">
+        <input
+          type="text"
+          id="guest-name"
+          placeholder="username"
+          maxlength="32"
+          required
+        />
+        <textarea
+          id="guest-message"
+          placeholder="leave a comment..."
+          maxlength="280"
+          required
+        ></textarea>
+        <button type="submit" class="btn">Post Comment</button>
+      </form>
 
-      <div class="comment">
-        <div class="comment-header">
-          <span class="comment-user">midnight-architect</span>
-          <span class="comment-meta">02/02/2006 • 12:04 AM</span>
+      <div id="guestbook-comments">
+        <div class="comment note">
+          Comments reset when the page refreshes.
         </div>
-        <div class="comment-body">
-          the vibes are immaculate. java spring boot supremacy.
-        </div>
-      </div>
-
-      <div class="comment note">
-        Got comments? Email jerardlguevarra@gmail.com to add your comment here!
       </div>
     </section>
+
 
   </div>
 
     <footer>
       © Jerard Louis Dayanghirang Guevarra
     </footer>
+  
+<script>
+  const form = document.getElementById("guestbook-form");
+  const nameInput = document.getElementById("guest-name");
+  const messageInput = document.getElementById("guest-message");
+  const commentsContainer = document.getElementById("guestbook-comments");
+
+  const MAX_COMMENTS = 10;
+
+  // Fake Top Friends (MySpace energy)
+  const TOP_FRIENDS = [
+    { user: "xXRecruiterSlayerXx", msg: "ur backend experience is 🔥. drop the repo links!!" },
+    { user: "midnight-architect", msg: "the vibes are immaculate. java spring boot supremacy." },
+    { user: "c0d3vampire", msg: "clean APIs. sharp edges. no mercy." },
+    { user: "top8-overlord", msg: "add the project links and ur hired (probably)." }
+  ];
+
+  function pad2(n) { return String(n).padStart(2, "0"); }
+
+  // ASCII timestamp like: † 02/03/2006 11:42 PM †
+  function asciiTimestamp(date = new Date()) {
+    const mm = pad2(date.getMonth() + 1);
+    const dd = pad2(date.getDate());
+    const yyyy = date.getFullYear();
+
+    let hours = date.getHours();
+    const minutes = pad2(date.getMinutes());
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
+    return `† ${mm}/${dd}/${yyyy} ${hours}:${minutes} ${ampm} †`;
+  }
+
+  function currentCount() {
+    return commentsContainer.querySelectorAll(".comment:not(.note)").length;
+  }
+
+  function enforceMax() {
+    // If more than MAX_COMMENTS, remove oldest at the bottom
+    const comments = commentsContainer.querySelectorAll(".comment:not(.note)");
+    if (comments.length <= MAX_COMMENTS) return;
+
+    for (let i = comments.length - 1; i >= MAX_COMMENTS; i--) {
+      comments[i].remove();
+    }
+  }
+
+  function addComment({ user, msg, date = new Date() }, { prepend = true } = {}) {
+    if (currentCount() >= MAX_COMMENTS) return false;
+
+    const comment = document.createElement("div");
+    comment.className = "comment";
+
+    const header = document.createElement("div");
+    header.className = "comment-header";
+
+    const userEl = document.createElement("span");
+    userEl.className = "comment-user";
+    userEl.textContent = user;
+
+    const metaEl = document.createElement("span");
+    metaEl.className = "comment-meta";
+    metaEl.textContent = asciiTimestamp(date);
+
+    header.appendChild(userEl);
+    header.appendChild(metaEl);
+
+    const body = document.createElement("div");
+    body.className = "comment-body";
+    body.textContent = msg;
+
+    comment.appendChild(header);
+    comment.appendChild(body);
+
+    // Insert before the note, and optionally prepend to top
+    const note = commentsContainer.querySelector(".comment.note");
+    if (prepend) {
+      if (note) commentsContainer.insertBefore(comment, note);
+      else commentsContainer.prepend(comment);
+    } else {
+      if (note) commentsContainer.insertBefore(comment, note);
+      else commentsContainer.appendChild(comment);
+    }
+
+    enforceMax();
+    return true;
+  }
+
+  // Add fake Top Friends comments first (once per refresh)
+  (function seedTopFriends() {
+    // Slightly backdate them so they look "earlier"
+    const now = Date.now();
+    const offsets = [18, 12, 7, 3].map(m => m * 60 * 1000); // minutes ago
+    TOP_FRIENDS.forEach((c, i) => {
+      addComment(
+        { user: c.user, msg: c.msg, date: new Date(now - (offsets[i] || 0)) },
+        { prepend: true }
+      );
+    });
+  })();
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const user = nameInput.value.trim();
+    const msg = messageInput.value.trim();
+
+    if (!user || !msg) return;
+
+    // If full, remove oldest (very MySpace: newest stays)
+    if (currentCount() >= MAX_COMMENTS) {
+      const comments = commentsContainer.querySelectorAll(".comment:not(.note)");
+      if (comments.length) comments[comments.length - 1].remove();
+    }
+
+    addComment({ user, msg, date: new Date() }, { prepend: true });
+
+    nameInput.value = "";
+    messageInput.value = "";
+    nameInput.focus();
+  });
+</script>
+
+
 </body>
 </html>
 
