@@ -292,3 +292,22 @@ footer {
     transition: none !important;
   }
 }
+
+/* ====== HARD MYSPACE-STYLE EDGES ====== */
+
+/* Remove all rounding everywhere */
+* {
+  border-radius: 0 !important;
+}
+
+/* Explicitly reinforce sharp edges on key elements */
+header,
+section,
+.btn,
+.pill,
+.item,
+.grid,
+.wrap,
+footer {
+  border-radius: 0 !important;
+}
