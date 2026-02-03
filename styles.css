@@ -311,3 +311,110 @@ section,
 footer {
   border-radius: 0 !important;
 }
+
+/* ================================
+   MYSPACE GOTH MODE (MAXIMUM)
+   ================================ */
+
+/* Fixed-width, old-school layout */
+.wrap {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+/* EVERYTHING SHARP */
+* {
+  border-radius: 0 !important;
+}
+
+/* Underlined links everywhere */
+a {
+  text-decoration: underline !important;
+  color: #9b1b24;
+}
+
+a:hover {
+  color: #ff1a1a;
+  background: #000;
+}
+
+/* Double-bordered boxes (classic MySpace tables) */
+header,
+section {
+  border: 2px double rgba(140, 20, 30, 0.9);
+  background: #000;
+}
+
+/* Extra inner border for that “nested table” feel */
+header::after,
+section::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(140, 20, 30, 0.45);
+  pointer-events: none;
+}
+
+/* Section titles: boxed + aggressive */
+h2 {
+  border: 1px solid rgba(140, 20, 30, 0.9);
+  padding: 6px 10px;
+  display: inline-block;
+  background: #000;
+}
+
+/* Remove soft gradients completely */
+header,
+section,
+.btn,
+.pill {
+  background: #000 !important;
+}
+
+/* Buttons now look like clickable forum links */
+.btn {
+  border: 1px solid #9b1b24;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background: #140204 !important;
+  box-shadow: none;
+}
+
+/* Skills become old-school tags */
+.pill {
+  border: 1px solid #9b1b24;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  background: #000;
+}
+
+/* Dotted red dividers like profile sections */
+.item {
+  border-bottom: 1px dotted rgba(255, 26, 26, 0.6);
+}
+
+/* Lists tighter, more “HTML table” feeling */
+ul {
+  margin-left: 14px;
+}
+
+li {
+  margin: 6px 0;
+}
+
+/* Footer like MySpace copyright text */
+footer {
+  border-top: 1px solid rgba(140, 20, 30, 0.9);
+  padding-top: 12px;
+  font-size: 0.8rem;
+}
+
+/* Disable modern animations */
+* {
+  animation: none !important;
+  transition: none !important;
+}
