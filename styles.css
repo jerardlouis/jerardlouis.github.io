@@ -418,3 +418,228 @@ footer {
   animation: none !important;
   transition: none !important;
 }
+
+/* ==========================================
+   MAX MYSPACE GOTH PACK (ALL THE THINGS)
+   Solid black base, hard edges, old-web energy
+   ========================================== */
+
+/* HARD EDGES EVERYWHERE */
+* { border-radius: 0 !important; }
+
+/* Ensure everything is boxed and stark */
+header, section, .btn, .pill, .top8-card, .comment, .marquee {
+  background: #000 !important;
+  border-color: rgba(140, 20, 30, 0.85) !important;
+}
+
+/* Underlined links like MySpace */
+a { text-decoration: underline !important; }
+a:hover { color: #ff1a1a; background: #000; }
+
+/* Double-border “table” look */
+header, section {
+  border: 2px double rgba(140, 20, 30, 0.9) !important;
+  position: relative;
+}
+
+/* Inner inset border for nested-table vibes */
+header::after, section::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(140, 20, 30, 0.45);
+  pointer-events: none;
+}
+
+/* Aggressive boxed headers + hover blink */
+h2 {
+  border: 1px solid rgba(140, 20, 30, 0.9);
+  padding: 6px 10px;
+  display: inline-block;
+  background: #000;
+}
+
+h2:hover {
+  animation: blink666 0.7s steps(2, end) infinite;
+}
+
+@keyframes blink666 {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ASCII divider */
+.ascii-divider {
+  margin-top: 14px;
+  color: rgba(255, 26, 26, 0.7);
+  letter-spacing: 2px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Marquee (CSS safe version) */
+.marquee {
+  margin-top: 16px;
+  border: 1px solid rgba(140, 20, 30, 0.85);
+  padding: 8px 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.marquee__track {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollMyspace 16s linear infinite;
+  color: rgba(255, 26, 26, 0.75);
+}
+
+@keyframes scrollMyspace {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Top 8 grid */
+.top8 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .top8 { grid-template-columns: 1fr; }
+}
+
+.top8-card {
+  border: 2px solid rgba(140, 20, 30, 0.85);
+  padding: 12px;
+}
+
+.top8-name {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 26, 26, 0.85);
+  margin-bottom: 6px;
+}
+
+.top8-desc {
+  color: rgba(239, 232, 234, 0.85);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.top8-link {
+  display: inline-block;
+  border: 1px solid rgba(140, 20, 30, 0.85);
+  padding: 6px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Now Playing */
+.now-playing {
+  border: 2px solid rgba(140, 20, 30, 0.85);
+  padding: 12px;
+}
+
+.np-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.np-label {
+  color: rgba(255, 26, 26, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.np-value { color: rgba(239, 232, 234, 0.85); }
+
+.now-playing audio {
+  width: 100%;
+  margin-top: 10px;
+  filter: grayscale(1) contrast(1.2);
+}
+
+.np-note {
+  margin-top: 10px;
+  color: rgba(194, 160, 167, 0.85);
+  font-size: 0.9rem;
+}
+
+/* Comments / Guestbook */
+.comment {
+  border: 2px solid rgba(140, 20, 30, 0.85);
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted rgba(255, 26, 26, 0.6);
+}
+
+.comment-user {
+  font-weight: 800;
+  color: rgba(255, 26, 26, 0.85);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.comment-meta {
+  color: rgba(194, 160, 167, 0.85);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.comment-body {
+  margin-top: 10px;
+  color: rgba(239, 232, 234, 0.9);
+}
+
+.comment.note {
+  border-style: dashed;
+  color: rgba(194, 160, 167, 0.9);
+  font-style: italic;
+}
+
+/* Extra MySpace: dotted dividers */
+.item {
+  border-bottom: 1px dotted rgba(255, 26, 26, 0.55) !important;
+}
+
+/* Kill modern transitions/animations except marquee/blink */
+* {
+  transition: none !important;
+}
+
+/* Keep marquee/blink, stop the rest */
+header, section, .btn::before, .pill::before {
+  animation: none !important;
+}
+
+/* Spotify embed — MySpace goth styling */
+.spotify-player {
+  border: 2px solid rgba(140, 20, 30, 0.85);
+  background: #000;
+  margin-top: 10px;
+  filter:
+    grayscale(1)
+    contrast(1.15)
+    brightness(0.85);
+}
+
+/* Remove Spotify's rounded corners */
+.spotify-player {
+  border-radius: 0 !important;
+}
